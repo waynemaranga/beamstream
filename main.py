@@ -8,22 +8,22 @@ from st_envelopes import ShearForceEnvelope, BendingMomentEnvelope
 from st_inputs import input_spans, input_cases
 
 
-st.set_page_config(layout="wide", page_title="LEMBIT\u00A9", page_icon=":hammer_and_wrench:")
+st.set_page_config(layout="wide", page_title="BeamStream\u00A9", page_icon=":hammer_and_wrench:")
 
 # -> Top Header & Info
-st.title('👷 LEMBIT\u00A9: The Lambistic Revit')
+st.title('👷 BEAMSTREAM\u00A9: Beam Analysis')
 st.subheader('Generate Moment Distribution Tables and Shear Force & Bending Moment Envelopes for a 2-span continuous beam with UDLs for 3 Load Cases.')
-st.write('available for free for a limited time only.')
+st.write('Available for free for a limited time only.')
 
 
 # # -> Sidebar
-st.sidebar.title('LEMBIT \u00A9')
+st.sidebar.title('Contents: \u00A9')
 st.sidebar.subheader('📝 Input')
 st.sidebar.subheader('📊 Results')
 st.sidebar.subheader('📋 Moment Distribution Tables')
 st.sidebar.subheader('📈 Shear Force Envelope')
 st.sidebar.subheader('💳 Bending Moment Envelope')
-st.sidebar.write('Made with pride & contempt 🚮 in Nairobi, Kenya 🇰🇪 \u00A9 2023')
+st.sidebar.write('Made in Nairobi, Kenya 🇰🇪 \u00A9 2023')
 
 # -> User Inputs
 # Span lengths

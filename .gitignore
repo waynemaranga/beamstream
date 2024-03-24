@@ -1,0 +1,6 @@
+test/
+*pycache*
+*.pyc
+*.pyo
+beamstream.code-workspace
+*.vscode/
