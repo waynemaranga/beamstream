@@ -1,0 +1,5 @@
+{
+  "python.analysis.typeCheckingMode": "standard"
+
+  // "pylint.args": ["--disable:C0103"]
+}

@@ -1,4 +1,8 @@
-slab_types = [
+"""Beta Table, from Eurocode"""
+
+from typing import Any
+
+slab_types: list[str] = [
     "Interior panels",
     "One short edge discontinuous",
     "One long edge discontinuous",
@@ -12,7 +16,7 @@ slab_types = [
 
 type_a, type_b, type_c, type_d, type_e, type_f, type_g, type_h, type_i = slab_types
 
-slab_type_list = [
+slab_type_list: list[str] = [
     type_a,
     type_b,
     type_c,
@@ -24,7 +28,7 @@ slab_type_list = [
     type_i,
 ]
 
-bound_list = [
+bound_list: list[float] = [
     1.0,
     1.1,
     1.2,
@@ -35,7 +39,7 @@ bound_list = [
     2.0,
 ]
 
-slab_def_map = {
+slab_def_map: dict[str, str] = {
     "A": slab_type_list[0],
     "B": slab_type_list[1],
     "C": slab_type_list[2],
@@ -48,7 +52,7 @@ slab_def_map = {
 }
 
 
-beta = {
+beta: dict[str, dict[str, Any]] = {
     type_a: {
         "type": type_a,
         "1.0": [0.031, 0.024],
