@@ -5,29 +5,31 @@
 # pylint: disable = W0201
 
 # --- Package imports
-from typing import Any
+from typing import Any, Union
 from utilities.interpoleit import interpoleit
 import libraries.betatable as betas
 from libraries.betatable import bound_list, slab_def_map
+
+Number = Union[float, int]
 
 
 class Slab:
     """Two-way RC Slab"""
 
-    def __init__(self, lx: float | int, ly: float | int) -> None:
-        self.lx: float | int = lx
-        self.ly: float | int = ly
+    def __init__(self, lx: Number, ly: Number) -> None:
+        self.lx: Number = lx
+        self.ly: Number = ly
         self.ly_lx: float = ly / lx
 
     # def area(self): # Method declaration "area" is obscured by a declaration of the same name PylancereportRedeclaration
-    def area(self) -> float | int:
+    def area(self) -> Number:
         """Slab Area, length * width, in m2"""
-        self._area: float | int = self.ly * self.lx
+        self._area: Number = self.ly * self.lx
         return self._area
 
-    def actions(self, actions: float | int) -> float | int:
+    def actions(self, actions: Number) -> Number:
         """Slab Actions in kN/m2"""
-        self._actions: float | int = actions
+        self._actions: Number = actions
         return actions
 
     # --- Beta
