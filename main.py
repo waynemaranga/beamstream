@@ -53,7 +53,7 @@ if st.button(label="Run ▶️"):
     st.balloons()
 
     # -> Load case A
-    case_A = BeamAnalysis(spans=[L_12, L_23], udls=[w_12A, w_23A])
+    case_A = BeamAnalysis(spans=[L_12, L_23], udls=[w_12A, w_23A])  # type: ignore
     case_A_rx: list[Any] = case_A.get_reactions()
     case_A_plots = Plots(spans=[L_12, L_23], udls=[w_12A, w_23A], reactions=case_A_rx)
     case_A_re: list[list[Any]] = case_A.redistribution(percentage=re_fA)
@@ -61,11 +61,11 @@ if st.button(label="Run ▶️"):
     case_A_plots_re = Plots(
         spans=[L_12, L_23], udls=[w_12A, w_23A], reactions=case_A.reactions_fin_re
     )
-    case_A_mdm = MomentDistribution(spans=[L_12, L_23], udls=[w_12A, w_23A])
+    case_A_mdm = MomentDistribution(spans=[L_12, L_23], udls=[w_12A, w_23A])  # type: ignore
     case_A_mdm.run(redistribution=re_fA)
 
     # -> Load case B
-    case_B = BeamAnalysis(spans=[L_12, L_23], udls=[w_12B, w_23B])
+    case_B = BeamAnalysis(spans=[L_12, L_23], udls=[w_12B, w_23B])  # type: ignore
     case_B_rx: list[Any] = case_B.get_reactions()
     case_B_plots = Plots(spans=[L_12, L_23], udls=[w_12B, w_23B], reactions=case_B_rx)
     case_B_re: list[list[Any]] = case_B.redistribution(percentage=re_fB)
@@ -73,19 +73,19 @@ if st.button(label="Run ▶️"):
     case_B_plots_re = Plots(
         spans=[L_12, L_23], udls=[w_12B, w_23B], reactions=case_B.reactions_fin_re
     )
-    case_B_mdm = MomentDistribution(spans=[L_12, L_23], udls=[w_12B, w_23B])
+    case_B_mdm = MomentDistribution(spans=[L_12, L_23], udls=[w_12B, w_23B])  # type: ignore
     case_B_mdm.run(redistribution=re_fB)
 
     # -> Load case C
-    case_C = BeamAnalysis(spans=[L_12, L_23], udls=[w_12C, w_23C])
+    case_C = BeamAnalysis(spans=[L_12, L_23], udls=[w_12C, w_23C])  # type: ignore
     case_C_rx: list[Any] = case_C.get_reactions()
     case_C_plots = Plots(spans=[L_12, L_23], udls=[w_12C, w_23C], reactions=case_C_rx)
     case_C_re: list[list[Any]] = case_C.redistribution(percentage=re_fC)
-    case_C_re_rx = case_C.reactions_fin_re
+    case_C_re_rx: list[Number] = case_C.reactions_fin_re
     case_C_plots_re = Plots(
         spans=[L_12, L_23], udls=[w_12C, w_23C], reactions=case_C.reactions_fin_re
     )
-    case_C_mdm = MomentDistribution(spans=[L_12, L_23], udls=[w_12C, w_23C])
+    case_C_mdm = MomentDistribution(spans=[L_12, L_23], udls=[w_12C, w_23C])  # type: ignore
     case_C_mdm.run(redistribution=re_fC)
 
     # --=> OUTPUTS
@@ -95,14 +95,14 @@ if st.button(label="Run ▶️"):
     with col_A:
         st.subheader(body="🇦 Case A")
         st.write(
-            case_A_mdm.get_results_st(redistr_pct=re_fA)
+            case_A_mdm.get_results_st(redistr_pct=re_fA)  # type: ignore
         )  # Display textual results
     with col_B:
         st.subheader(body="🇧 Case B")
-        st.write(case_B_mdm.get_results_st(redistr_pct=re_fB))
+        st.write(case_B_mdm.get_results_st(redistr_pct=re_fB))  # type: ignore
     with col_C:
         st.subheader(body="🇨 Case C")
-        st.write(case_C_mdm.get_results_st(redistr_pct=re_fC))
+        st.write(case_C_mdm.get_results_st(redistr_pct=re_fC))  # type: ignore
 
     # -- Moment Distribution Method Tables
     st.header(body="📋 Moment Distribution Tables")

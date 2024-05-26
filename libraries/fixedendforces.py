@@ -2,12 +2,14 @@
 
 # pylint: disable = C0103
 
+from typing import Union
 from operator import neg
 
+Number = Union[float, int]
 
 # Fixed-structure force function
 def fixed_end_forces(
-    udl: float | int, span: float | int, EI: float | int
+    udl: Number, span: Number, EI: Number
 ) -> list[float]:
     """Fixed End Forces"""
     VAB_F: float = udl * span / 2

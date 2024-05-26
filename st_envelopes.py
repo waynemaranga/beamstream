@@ -1,10 +1,18 @@
+"""Shear and Moment Envelopes for the Streamlit frontend"""
+
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+from plotly.graph_objects import Figure
 import numpy as np
 
 
 class ShearForceEnvelope:
-    def __init__(self, case_1, case_2, case_3):
+    """Shear Force Envelope.
+    Takes three load cases, returns matplotlib.pyplot and plotly.graph
+    envelopes
+    """
+
+    def __init__(self, case_1, case_2, case_3) -> None:
         """
         Initializes the ComparePlots class with three instances of the Plots class.
         """
@@ -17,47 +25,57 @@ class ShearForceEnvelope:
         self.plot3.sfd()
 
     def matplotlib(self):
+        """Matplotlib Pyplot Envelope"""
         # -> Plot
         plt.figure(figsize=(10, 5))
         plt.grid(which="major", linestyle=":", linewidth="0.5", color="black")
         plt.grid(which="minor", linestyle=":", linewidth="0.5", color="grey")
         plt.minorticks_on()
-        plt.plot(self.plot1.x_RHSv, np.zeros(1000), color="black")
-        plt.plot(self.plot1.x_LHSv, np.zeros(1000), color="black")
+        plt.plot(self.plot1.x_RHSv, np.zeros(shape=1000), color="black")
+        plt.plot(self.plot1.x_LHSv, np.zeros(shape=1000), color="black")
 
         # -> Case A
         plt.plot(self.plot1.x_LHSv, self.plot1.y_LHSv, label="Case A", color="green")
         plt.plot(self.plot1.x_RHSv, self.plot1.y_RHSv, label="Case A", color="green")
-        plt.fill_between(self.plot1.x_LHSv, self.plot1.y_LHSv, color="blue", alpha=0.2)
-        plt.fill_between(self.plot1.x_RHSv, self.plot1.y_RHSv, color="blue", alpha=0.2)
+        plt.fill_between(
+            x=self.plot1.x_LHSv, y1=self.plot1.y_LHSv, color="blue", alpha=0.2
+        )
+        plt.fill_between(
+            x=self.plot1.x_RHSv, y1=self.plot1.y_RHSv, color="blue", alpha=0.2
+        )
 
         # -> Case B
         plt.plot(self.plot2.x_LHSv, self.plot2.y_LHSv, label="Case B", color="blue")
         plt.plot(self.plot2.x_RHSv, self.plot2.y_RHSv, label="Case B", color="blue")
         plt.fill_between(
-            self.plot2.x_LHSv, self.plot2.y_LHSv, color="orange", alpha=0.2
+            x=self.plot2.x_LHSv, y1=self.plot2.y_LHSv, color="orange", alpha=0.2
         )
         plt.fill_between(
-            self.plot2.x_RHSv, self.plot2.y_RHSv, color="orange", alpha=0.2
+            x=self.plot2.x_RHSv, y1=self.plot2.y_RHSv, color="orange", alpha=0.2
         )
 
         # -> Case C
         plt.plot(self.plot3.x_LHSv, self.plot3.y_LHSv, label="Case C", color="red")
         plt.plot(self.plot3.x_RHSv, self.plot3.y_RHSv, label="Case C", color="red")
-        plt.fill_between(self.plot3.x_LHSv, self.plot3.y_LHSv, color="green", alpha=0.2)
-        plt.fill_between(self.plot3.x_RHSv, self.plot3.y_RHSv, color="green", alpha=0.2)
+        plt.fill_between(
+            x=self.plot3.x_LHSv, y1=self.plot3.y_LHSv, color="green", alpha=0.2
+        )
+        plt.fill_between(
+            x=self.plot3.x_RHSv, y1=self.plot3.y_RHSv, color="green", alpha=0.2
+        )
 
         # Adding labels, title and legend
-        plt.xlabel("Position along the beam")
-        plt.ylabel("Shear Force")
-        plt.title("Shear Force Envelope: Static")
+        plt.xlabel(xlabel="Position along the beam")
+        plt.ylabel(ylabel="Shear Force")
+        plt.title(label="Shear Force Envelope: Static")
         plt.legend()
 
         # Display the plot
         # plt.show()
-        return plt # FIXME: working but with pylnce error/wrning, check return type required by Streamlit
+        return plt  # FIXME: working but with pylnce error/wrning, check return type required by Streamlit
 
-    def plotly(self):
+    def plotly(self) -> Figure:
+        """Plotly Graph Objects Envelope"""
         # ->
         plot_layout = go.Layout(width=900, height=600)
         fig = go.Figure(layout=plot_layout)
@@ -67,7 +85,7 @@ class ShearForceEnvelope:
 
         # -> Case A
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot1.x_LHSv,
                 y=self.plot1.y_LHSv,
                 fill="tozeroy",
@@ -78,7 +96,7 @@ class ShearForceEnvelope:
             )
         )
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot1.x_RHSv,
                 y=self.plot1.y_RHSv,
                 fill="tozeroy",
@@ -91,7 +109,7 @@ class ShearForceEnvelope:
 
         # -> Case B
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot2.x_LHSv,
                 y=self.plot2.y_LHSv,
                 fill="tozeroy",
@@ -102,7 +120,7 @@ class ShearForceEnvelope:
             )
         )
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot2.x_RHSv,
                 y=self.plot2.y_RHSv,
                 fill="tozeroy",
@@ -115,7 +133,7 @@ class ShearForceEnvelope:
 
         # -> Case C
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot3.x_LHSv,
                 y=self.plot3.y_LHSv,
                 fill="tozeroy",
@@ -126,7 +144,7 @@ class ShearForceEnvelope:
             )
         )
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot3.x_RHSv,
                 y=self.plot3.y_RHSv,
                 fill="tozeroy",
@@ -138,14 +156,18 @@ class ShearForceEnvelope:
         )
 
         # ->
-        fig.update_layout(title="Shear Force Envelope: Interactive", plot_bgcolor="white")
+        fig.update_layout(
+            title="Shear Force Envelope: Interactive", plot_bgcolor="white"
+        )
         # fig.show()
 
         return fig
 
 
 class BendingMomentEnvelope:
-    def __init__(self, case_1, case_2, case_3):
+    """Bending Moment"""
+
+    def __init__(self, case_1, case_2, case_3) -> None:
         """""" ""
         self.plot1 = case_1
         self.plot2 = case_2
@@ -156,13 +178,14 @@ class BendingMomentEnvelope:
         self.plot3.bmd()
 
     def matplotlib(self):
+        """Matplolib Pyplot"""
         # -> Plot
         plt.figure(figsize=(10, 5))
         plt.grid(which="major", linestyle=":", linewidth="0.5", color="black")
         plt.grid(which="minor", linestyle=":", linewidth="0.5", color="grey")
         plt.minorticks_on()
-        plt.plot(self.plot1.x_RHSv, np.zeros(1000), color="black")
-        plt.plot(self.plot1.x_LHSv, np.zeros(1000), color="black")
+        plt.plot(self.plot1.x_RHSv, np.zeros(shape=1000), color="black")
+        plt.plot(self.plot1.x_LHSv, np.zeros(shape=1000), color="black")
 
         # ->
         plt.axhline(y=0, color="k", linestyle="--")
@@ -190,12 +213,13 @@ class BendingMomentEnvelope:
         plt.plot(self.plot3.x_range_RHS, self.plot3.y_range_RHS, color="red")
 
         # ->
-        plt.title("Bending Moment Envelope: Static")
+        plt.title(label="Bending Moment Envelope: Static")
         plt.gca().invert_yaxis()
         # plt.show()
         return plt
 
-    def plotly(self):
+    def plotly(self) -> Figure:
+        """Graph Objects"""
         # ->
         plot_layout = go.Layout(width=800, height=500)
         fig = go.Figure(layout=plot_layout)
@@ -203,7 +227,7 @@ class BendingMomentEnvelope:
 
         # -> Case A
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot1.x_range_LHS,
                 y=self.plot1.y_range_LHS,
                 fill="tozeroy",
@@ -214,7 +238,7 @@ class BendingMomentEnvelope:
             )
         )  # Note hover templ in HTML
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot1.x_range_RHS,
                 y=self.plot1.y_range_RHS,
                 fill="tozeroy",
@@ -227,7 +251,7 @@ class BendingMomentEnvelope:
 
         # -> Case B
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot2.x_range_LHS,
                 y=self.plot2.y_range_LHS,
                 fill="tozeroy",
@@ -238,7 +262,7 @@ class BendingMomentEnvelope:
             )
         )
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot2.x_range_RHS,
                 y=self.plot2.y_range_RHS,
                 fill="tozeroy",
@@ -251,7 +275,7 @@ class BendingMomentEnvelope:
 
         # -> Case C
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot3.x_range_LHS,
                 y=self.plot3.y_range_LHS,
                 fill="tozeroy",
@@ -262,7 +286,7 @@ class BendingMomentEnvelope:
             )
         )
         fig.add_trace(
-            go.Scatter(
+            trace=go.Scatter(
                 x=self.plot3.x_range_RHS,
                 y=self.plot3.y_range_RHS,
                 fill="tozeroy",
@@ -276,7 +300,8 @@ class BendingMomentEnvelope:
         # ->
         fig.update_layout(
             plot_bgcolor="white",
-            title="Bending Moment Envelope: Interactive", yaxis=dict(autorange="reversed")
+            title="Bending Moment Envelope: Interactive",
+            yaxis=dict(autorange="reversed"),
         )
         # fig.show()
 

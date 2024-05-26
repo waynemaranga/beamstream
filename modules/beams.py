@@ -1,24 +1,29 @@
 """# BEAMS: Two Span Continuous"""
 
-from typing import Any
-from utilities.beamanalysis import BeamAnalysis
-
-# from utilities.plots import Plots
 # pylint: disable = C0103
 # pylint: disable = W0201
 # pylint: disable = W0511
+
+from typing import Any, Union
+from utilities.beamanalysis import BeamAnalysis
+
+Number = Union[float, int]
+
+# from utilities.plots import Plots
 
 
 class Beam:
     """Beams"""
 
-    def __init__(self, spans, udls, EI_values=[1, 1]) -> None:
+    def __init__(
+        self, spans: list[Number], udls: list[Number], EI_values=[1, 1]
+    ) -> None:
         #! FIXME:  Dangerous default value [] as argumentPylintW0102:dangerous-default-value
         self.span_12, self.span_23 = spans
         self.udl_12, self.udl_23 = udls
         self.EI_12, self.EI_23 = EI_values
 
-    def analysis(self):
+    def analysis(self) -> BeamAnalysis:
         """Beam Analysis by SSM & MDM"""
         self.beam_analysis = BeamAnalysis(
             spans=[self.span_12, self.span_12],
